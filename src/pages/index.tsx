@@ -3,7 +3,7 @@ import Head from "next/head";
 
 export const MetaData = () => (
   <Head>
-    <title>My page title</title>
+    <title>Crabclaw</title>
     <meta
       name="description"
       content="CrabClaw | Online porfolio of Aadam Ishmael"
