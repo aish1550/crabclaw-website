@@ -1,9 +1,8 @@
-import { Footer, TopBar } from "@/components";
+// import { Footer, TopBar } from "@/components";
 import {
   createTheme,
   CssBaseline,
   ThemeProvider,
-  Box,
   Container,
 } from "@mui/material";
 import type { AppProps } from "next/app";
@@ -14,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <TopBar maxWidth={"md"} sx={{ py: 2 }} />
+      {/* <TopBar maxWidth={"md"} sx={{ py: 2 }} /> */}
 
       <Container
         component={"main"}
@@ -28,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Container>
 
-      <Footer maxWidth={"md"} sx={{ py: 2 }} />
+      {/* <Footer maxWidth={"md"} sx={{ py: 2 }} /> */}
     </ThemeProvider>
   );
 }
