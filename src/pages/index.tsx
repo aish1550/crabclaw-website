@@ -36,7 +36,7 @@ export default function Home({
           </Grid>
           <Grid item sm={12} md>
             {/* TODO: create image or animation */}
-            {/* <Container
+            <Container
               sx={{
                 background:
                   'url("https://img.freepik.com/premium-vector/web-development-coding-programming-languages-css-html-js-program-code-screen-laptop_530733-2087.jpg?w=2000") center right no-repeat',
@@ -44,7 +44,7 @@ export default function Home({
                 width: "100%",
                 height: "300px",
               }}
-            /> */}
+            />
           </Grid>
         </Grid>
       </PageWrapper>
