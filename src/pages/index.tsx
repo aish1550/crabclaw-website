@@ -4,7 +4,10 @@ import { HeroTitle, MetaData, PageWrapper } from "@/components";
 import { interpolateString } from "../utils/interpolateString";
 import { appName } from "../appConfig";
 
-export default function Home(props: any) {
+export default function Home({
+  subtitle,
+  currentWorkplace,
+}: ContentfulReponse) {
   return (
     <>
       <PageWrapper
@@ -16,11 +19,11 @@ export default function Home(props: any) {
           <Grid item sm={12} md={6}>
             <HeroTitle sx={{ mb: 1 }}>{appName}</HeroTitle>
             <Box sx={{ mb: 5 }}>
-              {/* <Typography variant="h5">{subtitle}</Typography> */}
-              {/* <Typography variant="h5">
+              <Typography variant="h5">{subtitle}</Typography>
+              <Typography variant="h5">
                 Currently working @{" "}
                 <span style={{ fontWeight: "bold" }}>{currentWorkplace}</span>
-              </Typography> */}
+              </Typography>
             </Box>
             {/* <Typography gutterBottom variant="body2">
               {interpolateString(
@@ -48,30 +51,30 @@ export default function Home(props: any) {
   );
 }
 
-// type ContentfulReponse = {
-//   subtitle: string;
-//   authorSummary: string;
-//   currentWorkplace: string;
-// };
+type ContentfulReponse = {
+  subtitle: string;
+  authorSummary: string;
+  currentWorkplace: string;
+};
 
-// export const getServerSideProps: GetServerSideProps<
-//   ContentfulReponse
-// > = async () => {
-//   const { CONTENTFUL_SPACE_ID, CONTENTFUL_PREVIEW_ACCESS_TOKEN } = process.env;
+export const getServerSideProps: GetServerSideProps<
+  ContentfulReponse
+> = async () => {
+  const { CONTENTFUL_SPACE_ID, CONTENTFUL_PREVIEW_ACCESS_TOKEN } = process.env;
 
-//   const baseUrl = "https://preview.contentful.com";
-//   const space_id = CONTENTFUL_SPACE_ID;
-//   const access_token = CONTENTFUL_PREVIEW_ACCESS_TOKEN;
-//   const environment_id = "master";
-//   const entry_id = "4hFPXBuB7pYRhaWIvL4CWT";
+  const baseUrl = "https://preview.contentful.com";
+  const space_id = CONTENTFUL_SPACE_ID;
+  const access_token = CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+  const environment_id = "master";
+  const entry_id = "4hFPXBuB7pYRhaWIvL4CWT";
 
-//   const result = await fetch(
-//     `${baseUrl}/spaces/${space_id}/environments/${environment_id}/entries/${entry_id}?access_token=${access_token}`
-//   ).then((res) => res.json());
+  const result = await fetch(
+    `${baseUrl}/spaces/${space_id}/environments/${environment_id}/entries/${entry_id}?access_token=${access_token}`
+  ).then((res) => res.json());
 
-//   return {
-//     props: {
-//       ...result.fields,
-//     },
-//   };
-// };
+  return {
+    props: {
+      ...result.fields,
+    },
+  };
+};
