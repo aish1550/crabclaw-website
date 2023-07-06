@@ -6,8 +6,9 @@ import { appName } from "../appConfig";
 
 export default function Home({
   subtitle,
+  authorSummary,
   currentWorkplace,
-}: ContentfulReponse) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <PageWrapper
@@ -25,13 +26,13 @@ export default function Home({
                 <span style={{ fontWeight: "bold" }}>{currentWorkplace}</span>
               </Typography>
             </Box>
-            {/* <Typography gutterBottom variant="body2">
+            <Typography gutterBottom variant="body2">
               {interpolateString(
                 authorSummary,
                 "{EXPERIENCE_YEARS}",
                 `${new Date().getFullYear() - 2007}`
               )}
-            </Typography> */}
+            </Typography>
           </Grid>
           <Grid item sm={12} md>
             {/* TODO: create image or animation */}
