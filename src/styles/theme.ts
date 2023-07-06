@@ -6,5 +6,3 @@ export const theme = createTheme({
     fontFamily: "inherit",
   },
 });
-
-console.warn(theme);
