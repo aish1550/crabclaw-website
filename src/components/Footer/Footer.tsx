@@ -1,17 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 import { Container, Divider, Typography, ContainerProps } from "@mui/material";
+import SocialNetworkLinks from "../SocialNetworkLinks/SocialNetworkLinks";
 
-type footer = ContainerProps;
+type FooterProps = ContainerProps & {
+  divider?: boolean;
+};
 
-export default function Footer(props: ContainerProps) {
+const Footer: FC<FooterProps> = ({ divider, ...rest }) => {
   return (
-    <footer>
-      <Container maxWidth={false} disableGutters>
-        <Divider />
-        <Container {...props}>
+    <>
+      {divider && <Divider />}
+      <Container component={"footer"} maxWidth={false} disableGutters {...rest}>
+        <Container>
           <Typography>Footer</Typography>
+          <SocialNetworkLinks />
         </Container>
       </Container>
-    </footer>
+    </>
   );
-}
+};
+
+export default Footer;

@@ -1,3 +1,4 @@
+import { appName } from "@/appConfig";
 import {
   Container,
   Typography,
@@ -7,34 +8,42 @@ import {
   Divider,
   ContainerProps,
 } from "@mui/material";
+import GeneralLink from "../GeneralLink/GeneralLink";
 import React from "react";
 
-type TopBar = ContainerProps;
+type TopBar = ContainerProps & {
+  divider?: boolean;
+};
 
-export default function TopBar(props: TopBar) {
+export default function TopBar({ divider, ...rest }: TopBar) {
   return (
-    <header>
-      <Container maxWidth={false} disableGutters>
-        <Container {...props}>
+    <>
+      <Container component={"header"} maxWidth={false} disableGutters {...rest}>
+        <Container>
           <Stack
             direction={"row"}
             alignItems={"center"}
             justifyContent={"space-between"}
           >
             <Box id="logo">
-              <Typography>CrabClaw</Typography>
+              <GeneralLink href="/" underline={"none"}>
+                <Typography fontWeight={"bold"}>{appName}</Typography>
+              </GeneralLink>
             </Box>
             <Box>
               <Grid container spacing={2}>
-                <Grid item>Nav</Grid>
-                <Grid item>Nav</Grid>
-                <Grid item>Nav</Grid>
+                <Grid item>
+                  <GeneralLink href="/about">About</GeneralLink>
+                </Grid>
+                <Grid item>
+                  <GeneralLink href="/contact">Contact</GeneralLink>
+                </Grid>
               </Grid>
             </Box>
           </Stack>
         </Container>
-        <Divider />
       </Container>
-    </header>
+      {divider && <Divider />}
+    </>
   );
 }
