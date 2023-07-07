@@ -1,14 +1,15 @@
 import { Container, Typography, Grid, Box } from "@mui/material";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { HeroTitle, MetaData, PageWrapper } from "@/components";
+import { HeroTitle, HeroImage, PageWrapper, useApp } from "@/components";
 import { interpolateString } from "../utils/interpolateString";
-import { appName } from "../appConfig";
 
 export default function Home({
   subtitle,
   authorSummary,
   currentWorkplace,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { appName } = useApp();
+
   return (
     <>
       <PageWrapper
@@ -34,17 +35,9 @@ export default function Home({
               )}
             </Typography>
           </Grid>
-          <Grid item sm={12} md>
-            {/* TODO: create image or animation */}
-            <Container
-              sx={{
-                background:
-                  'url("https://img.freepik.com/premium-vector/web-development-coding-programming-languages-css-html-js-program-code-screen-laptop_530733-2087.jpg?w=2000") center right no-repeat',
-                backgroundSize: "100%",
-                width: "100%",
-                height: "300px",
-              }}
-            />
+
+          <Grid item xs={12} md sx={{ display: ["none", "none", "flex"] }}>
+            <HeroImage />
           </Grid>
         </Grid>
       </PageWrapper>

@@ -1,3 +1,6 @@
+export { default as AppProvider } from "./AppProvider";
+export * from "./AppProvider";
+
 export { default as TopBar } from "./TopBar";
 export * from "./TopBar";
 
@@ -9,6 +12,9 @@ export * from "./MetaData";
 
 export { default as HeroTitle } from "./HeroTitle";
 export * from "./HeroTitle";
+
+export { default as HeroImage } from "./HeroImage";
+export * from "./HeroImage";
 
 export { default as PageWrapper } from "./PageWrapper";
 export * from "./PageWrapper";

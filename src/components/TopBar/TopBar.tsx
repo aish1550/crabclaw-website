@@ -1,4 +1,4 @@
-import { appName } from "@/appConfig";
+import { pageList } from "@/appConfig";
 import {
   Container,
   Typography,
@@ -10,12 +10,15 @@ import {
 } from "@mui/material";
 import GeneralLink from "../GeneralLink/GeneralLink";
 import React from "react";
+import { useApp } from "../AppProvider";
 
 type TopBar = ContainerProps & {
   divider?: boolean;
 };
 
 export default function TopBar({ divider, ...rest }: TopBar) {
+  const { appName } = useApp();
+
   return (
     <>
       <Container component={"header"} maxWidth={false} disableGutters {...rest}>
@@ -32,12 +35,19 @@ export default function TopBar({ divider, ...rest }: TopBar) {
             </Box>
             <Box>
               <Grid container spacing={2}>
-                <Grid item>
-                  <GeneralLink href="/about">About</GeneralLink>
-                </Grid>
-                <Grid item>
-                  <GeneralLink href="/contact">Contact</GeneralLink>
-                </Grid>
+                {pageList.map((navItem) =>
+                  navItem.show ? (
+                    <Grid key={navItem.alias} item>
+                      <GeneralLink
+                        href={navItem.path}
+                        variant="body2"
+                        fontWeight={"bold"}
+                      >
+                        {navItem.name}
+                      </GeneralLink>
+                    </Grid>
+                  ) : null
+                )}
               </Grid>
             </Box>
           </Stack>
