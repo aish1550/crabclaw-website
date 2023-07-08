@@ -1,17 +1,40 @@
-import React from "react";
-import { Container, Divider, Typography, ContainerProps } from "@mui/material";
+import React, { FC } from "react";
+import {
+  Container,
+  Divider,
+  Typography,
+  ContainerProps,
+  Grid,
+} from "@mui/material";
+import SocialNetworkLinks from "../SocialNetworkLinks/SocialNetworkLinks";
+import { useApp } from "../AppProvider";
 
-type footer = ContainerProps;
+type FooterProps = ContainerProps & {
+  divider?: boolean;
+};
 
-export default function Footer(props: ContainerProps) {
+const Footer: FC<FooterProps> = ({ divider, ...rest }) => {
+  const { appName } = useApp();
+
   return (
-    <footer>
-      <Container maxWidth={false} disableGutters>
-        <Divider />
-        <Container {...props}>
-          <Typography>Footer</Typography>
+    <>
+      {divider && <Divider />}
+      <Container component={"footer"} maxWidth={false} disableGutters {...rest}>
+        <Container sx={{ textAlign: ["center", "center", "inherit"] }}>
+          <Grid container>
+            <Grid item xs={12}>
+              <SocialNetworkLinks mb={2} sx={{ display: "inline-block" }} />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body2" gutterBottom>
+              ©{new Date().getFullYear()} {appName}. All rights reserved.
+            </Typography>
+          </Grid>
         </Container>
       </Container>
-    </footer>
+    </>
   );
-}
+};
+
+export default Footer;

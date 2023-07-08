@@ -1,3 +1,4 @@
+import { pageList } from "@/appConfig";
 import {
   Container,
   Typography,
@@ -7,34 +8,52 @@ import {
   Divider,
   ContainerProps,
 } from "@mui/material";
+import GeneralLink from "../GeneralLink/GeneralLink";
 import React from "react";
+import { useApp } from "../AppProvider";
 
-type TopBar = ContainerProps;
+type TopBar = ContainerProps & {
+  divider?: boolean;
+};
 
-export default function TopBar(props: TopBar) {
+export default function TopBar({ divider, ...rest }: TopBar) {
+  const { appName } = useApp();
+
   return (
-    <header>
-      <Container maxWidth={false} disableGutters>
-        <Container {...props}>
+    <>
+      <Container component={"header"} maxWidth={false} disableGutters {...rest}>
+        <Container>
           <Stack
             direction={"row"}
             alignItems={"center"}
             justifyContent={"space-between"}
           >
             <Box id="logo">
-              <Typography>CrabClaw</Typography>
+              <GeneralLink href="/" underline={"none"}>
+                <Typography fontWeight={"bold"}>{appName}</Typography>
+              </GeneralLink>
             </Box>
             <Box>
               <Grid container spacing={2}>
-                <Grid item>Nav</Grid>
-                <Grid item>Nav</Grid>
-                <Grid item>Nav</Grid>
+                {pageList.map((navItem) =>
+                  navItem.show ? (
+                    <Grid key={navItem.alias} item>
+                      <GeneralLink
+                        href={navItem.path}
+                        variant="body2"
+                        fontWeight={"bold"}
+                      >
+                        {navItem.name}
+                      </GeneralLink>
+                    </Grid>
+                  ) : null
+                )}
               </Grid>
             </Box>
           </Stack>
         </Container>
-        <Divider />
       </Container>
-    </header>
+      {divider && <Divider />}
+    </>
   );
 }

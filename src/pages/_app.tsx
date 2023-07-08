@@ -1,33 +1,29 @@
-// import { Footer, TopBar } from "@/components";
-import {
-  createTheme,
-  CssBaseline,
-  ThemeProvider,
-  Container,
-} from "@mui/material";
 import type { AppProps } from "next/app";
+import { Inter } from "next/font/google";
+import { Footer, TopBar, AppProvider } from "@/components";
+import { theme } from "../styles/theme";
+import { CssBaseline, ThemeProvider, Container } from "@mui/material";
 
-const theme = createTheme();
+const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {/* <TopBar maxWidth={"md"} sx={{ py: 2 }} /> */}
-
-      <Container
-        component={"main"}
-        maxWidth={"md"}
-        disableGutters
-        id="main-content"
-        sx={{
-          py: 2,
-        }}
-      >
-        <Component {...pageProps} />
-      </Container>
-
-      {/* <Footer maxWidth={"md"} sx={{ py: 2 }} /> */}
-    </ThemeProvider>
+    <div className={inter.className}>
+      <AppProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {/* <TopBar sx={{ py: 3 }} /> */}
+          <Container
+            component={"main"}
+            disableGutters
+            id="main-content"
+            sx={{ textAlign: ["center", "center", "left"] }}
+          >
+            <Component {...pageProps} />
+          </Container>
+          <Footer sx={{ py: 3 }} />
+        </ThemeProvider>
+      </AppProvider>
+    </div>
   );
 }
